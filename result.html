@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detection Result</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #1f4037, #99f2c8);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px;
+            margin: 0;
+        }
+
+        .result-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 16px;
+            display: inline-block;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-box h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .result-label {
+            font-size: 30px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .real {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .fake {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="result-box">
+        <h1>🎯 FaceMorph Detection Result</h1>
+
+        {% if result %}
+            <div class="result-label {{ 'real' if result == 'REAL' else 'fake' }}">
+                {{ '😃 REAL' if result == 'REAL' else '😨 FAKE' }}
+            </div>
+        {% else %}
+            <h2>Error: {{ result }}</h2>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="btn">🔙 Back to Home</a>
+    </div>
+
+</body>
+</html>
